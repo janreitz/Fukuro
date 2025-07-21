@@ -4,23 +4,6 @@ QT += quick \
 
 CONFIG += c++17
 
-# Platform-independent Git library configuration
-unix {
-    CONFIG += link_pkgconfig
-    PKGCONFIG += libgit2
-    
-    # If pkg-config fails, try manual linking
-    !packagesExist(libgit2) {
-        error("libgit2 development package not found. Install with: sudo apt install libgit2-dev")
-    }
-}
-
-win32 {
-    LIBS += -lgit2
-    # Adjust these paths for your Windows setup (e.g., using vcpkg)
-    INCLUDEPATH += "C:/vcpkg/installed/x64-windows/include"
-    LIBPATH += "C:/vcpkg/installed/x64-windows/lib"
-}
 
 
 # The following define makes your compiler emit warnings if you use
