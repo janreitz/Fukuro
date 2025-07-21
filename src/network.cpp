@@ -1,7 +1,5 @@
 #include "network.h"
 #include "utilities.h"
-// FIXME: PerformanceSuite temporarily disabled
-// #include "performancesuite.h"
 
 #include <QDebug>
 #include <cmath>
@@ -132,8 +130,6 @@ Edge* Network::edgeAt(int index) const
 void Network::tick()
 {
     //m_elapsedTimer.start();
-    // FIXME: Performance tracking temporarily disabled
-    // PerformanceSuite::getInstance()->tick("Network::tick repelling");
 
     for (auto cell : m_nodesByPosition.uniqueKeys())
     {
@@ -200,9 +196,7 @@ void Network::tick()
 //            node_j->applyForce(-force);
 //        }
 //    }
-    // PerformanceSuite::getInstance()->tock("Network::tick repelling");
 
-    // PerformanceSuite::getInstance()->tick("Network::tick edgeforces");
     for (auto node : m_nodes)
     {
         node->applyEdgeForces();
@@ -211,8 +205,6 @@ void Network::tick()
         //node->applyForce((-1) * m_centerTetherDamperConstant * Utilities::vectorProjection(node->velocity(), node->position()));
         node->applyForce((-1) * m_airFrictionConstant * Utilities::vectorLength(node->velocity()) * node->velocity());
     }
-    // PerformanceSuite::getInstance()->tock("Network::tick edgeforces");
-    // PerformanceSuite::getInstance()->tick("Network::tick updates");
     for (auto node : m_nodes)
     {
         node->doStep();
@@ -222,7 +214,6 @@ void Network::tick()
     {
         edge->updatePositions();
     }
-    // PerformanceSuite::getInstance()->tock("Network::tick updates");
 }
 
 int Network::nodeCount(QQmlListProperty<Node>* list) {

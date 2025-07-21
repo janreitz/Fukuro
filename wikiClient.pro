@@ -22,10 +22,6 @@ win32 {
     LIBPATH += "C:/vcpkg/installed/x64-windows/lib"
 }
 
-# PerformanceSuite dependency - comment out if not available
-# LIBS += -lPerformanceSuite
-# unix: INCLUDEPATH += /usr/local/include/PerformanceSuite
-# win32: INCLUDEPATH += "C:/PerformanceSuite/include"
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
