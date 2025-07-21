@@ -6,10 +6,19 @@ QT += \
 
 CONFIG += c++17
 
-LIBS += "C:/Users/jan-r/projects/libqgit2/build/bin/Debug/qgit2.lib"
-LIBS += "C:/Users/jan-r/projects/libqgit2/build/libgit2/Debug/git2.lib"
-INCLUDEPATH += "C:/Users/jan-r/projects/libqgit2/src"
-INCLUDEPATH += "C:/Users/jan-r/projects/libgit2/include"
+# FIXME: Git functionality temporarily disabled - no libgit2 needed for tests for now
+# Platform-independent Git library configuration
+# unix {
+#     CONFIG += link_pkgconfig
+#     PKGCONFIG += libgit2
+# }
+# 
+# win32 {
+#     LIBS += -lgit2
+#     # Adjust these paths for your Windows setup
+#     INCLUDEPATH += "C:/vcpkg/installed/x64-windows/include"
+#     LIBPATH += "C:/vcpkg/installed/x64-windows/lib"
+# }
 
 
 SOURCES += \
@@ -20,7 +29,6 @@ SOURCES += \
         ../../src/editorbackend.cpp \
         ../../src/filemanager.cpp \
         ../../src/fileparser.cpp \
-        ../../src/gitmanager.cpp \
         ../../src/linkprovider.cpp \
         ../../src/markdownhighlighter.cpp \
         ../../src/network.cpp \
@@ -34,6 +42,9 @@ SOURCES += \
         ../../src/titlesuggestionprovider.cpp \
         ../../src/utilities.cpp
 
+# Temporarily disabled - needs libgit2 direct integration
+# ../../src/gitmanager.cpp
+
 
 HEADERS += \
     ../../src/abstractdbclient.h \
@@ -43,7 +54,6 @@ HEADERS += \
     ../../src/editorbackend.h \
     ../../src/filemanager.h \
     ../../src/fileparser.h \
-    ../../src/gitmanager.h \
     ../../src/linkprovider.h \
     ../../src/markdownhighlighter.h \
     ../../src/network.h \
@@ -56,3 +66,6 @@ HEADERS += \
     ../../src/suggestion.h \
     ../../src/titlesuggestionprovider.h \
     ../../src/utilities.h
+
+# Temporarily disabled - needs libgit2 direct integration
+# ../../src/gitmanager.h

@@ -7,9 +7,9 @@
 #include "settings.h"
 #include "searchbackend.h"
 #include "network.h"
-#include "gitmanager.h"
-
-#include "qgitglobal.h"
+// FIXME: Git functionality temporarily disabled
+// #include "gitmanager.h"
+// #include "qgitglobal.h"
 
 #include <QObject>
 #include <QQuickItem>
@@ -21,7 +21,8 @@
 
 int main(int argc, char *argv[])
 {
-    LibQGit2::initLibQGit2();
+    // FIXME: Git functionality temporarily disabled
+    // LibQGit2::initLibQGit2();
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
@@ -53,7 +54,8 @@ int main(int argc, char *argv[])
     QObject::connect(&theFileManager, &FileManager::signalFileModified, DBManager::getInstance(), &DBManager::slotFileModified);
     QObject::connect(&theFileManager, &FileManager::signalFilesDeleted, DBManager::getInstance(), &DBManager::slotFilesDeleted);
     QObject::connect(&theFileManager, &QFileSystemModel::rootPathChanged, DBManager::getInstance(), &DBManager::slotWorkingDirectoryChanged);
-    QObject::connect(&theFileManager, &QFileSystemModel::rootPathChanged, GitManager::getInstance(), &GitManager::slotWorkingDirectoryChanged);
+    // FIXME: Git functionality temporarily disabled
+    // QObject::connect(&theFileManager, &QFileSystemModel::rootPathChanged, GitManager::getInstance(), &GitManager::slotWorkingDirectoryChanged);
     QObject::connect(DBManager::getInstance(), &DBManager::signalDBAvailable, &theFileManager, &FileManager::slotScanDirectory);
     QObject::connect(DBManager::getInstance(), &DBManager::signalDBAvailable, &theTableModelProvider, &SqlTableModelProvider::slotDBOpened);
 
@@ -71,7 +73,8 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("theSettings", settings);
     engine.rootContext()->setContextProperty("theFileManager", &theFileManager);
-    engine.rootContext()->setContextProperty("theGitManager", GitManager::getInstance());
+    // FIXME: Git functionality temporarily disabled
+    // engine.rootContext()->setContextProperty("theGitManager", GitManager::getInstance());
     engine.rootContext()->setContextProperty("theTitleSuggestionProvider", &theTitleSuggestionProvider);
     engine.rootContext()->setContextProperty("theLinkProvider", &theLinkProvider);
     engine.rootContext()->setContextProperty("theTableModelProvider", &theTableModelProvider);

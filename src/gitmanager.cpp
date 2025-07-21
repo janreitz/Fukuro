@@ -2,12 +2,12 @@
 #include "settings.h"
 #include "utilities.h"
 
-#include "qgitglobal.h"
-#include "qgitexception.h"
-#include "qgitoid.h"
-#include "private/pathcodec.h"
-
-#include "git2/index.h"
+// FIXME: Git functionality temporarily disabled - needs libgit2 direct integration
+// #include "qgitglobal.h"
+// #include "qgitexception.h"
+// #include "qgitoid.h"
+// #include "private/pathcodec.h"
+// #include "git2/index.h"
 
 #include <QDebug>
 #include <QDirIterator>

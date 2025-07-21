@@ -4,14 +4,28 @@ QT += quick \
 
 CONFIG += c++17
 
-LIBS += "C:/Users/jan-r/projects/libqgit2/build/bin/Debug/qgit2.lib"
-INCLUDEPATH += "C:/Users/jan-r/projects/libqgit2/src"
+# Platform-independent Git library configuration
+unix {
+    CONFIG += link_pkgconfig
+    PKGCONFIG += libgit2
+    
+    # If pkg-config fails, try manual linking
+    !packagesExist(libgit2) {
+        error("libgit2 development package not found. Install with: sudo apt install libgit2-dev")
+    }
+}
 
-LIBS += "C:/Users/jan-r/projects/libqgit2/build/libgit2/Debug/git2.lib"
-INCLUDEPATH += "C:/Users/jan-r/projects/libgit2/include"
+win32 {
+    LIBS += -lgit2
+    # Adjust these paths for your Windows setup (e.g., using vcpkg)
+    INCLUDEPATH += "C:/vcpkg/installed/x64-windows/include"
+    LIBPATH += "C:/vcpkg/installed/x64-windows/lib"
+}
 
-LIBS += "C:/Users/jan-r/projects/PerformanceSuite/target/release/PerformanceSuite.lib"
-INCLUDEPATH += C:/Users/jan-r/projects/PerformanceSuite/source
+# PerformanceSuite dependency - comment out if not available
+# LIBS += -lPerformanceSuite
+# unix: INCLUDEPATH += /usr/local/include/PerformanceSuite
+# win32: INCLUDEPATH += "C:/PerformanceSuite/include"
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -32,7 +46,6 @@ SOURCES += \
         src/editorbackend.cpp \
         src/filemanager.cpp \
         src/fileparser.cpp \
-        src/gitmanager.cpp \
         src/linkprovider.cpp \
         src/main.cpp \
         src/markdownhighlighter.cpp \
@@ -46,6 +59,9 @@ SOURCES += \
         src/suggestion.cpp \
         src/titlesuggestionprovider.cpp \
         src/utilities.cpp
+
+# Temporarily disabled - needs libgit2 direct integration
+# src/gitmanager.cpp
 
 RESOURCES += qml.qrc
 
@@ -70,7 +86,6 @@ HEADERS += \
     src/editorbackend.h \
     src/filemanager.h \
     src/fileparser.h \
-    src/gitmanager.h \
     src/linkprovider.h \
     src/markdownhighlighter.h \
     src/network.h \
@@ -83,6 +98,9 @@ HEADERS += \
     src/suggestion.h \
     src/titlesuggestionprovider.h \
     src/utilities.h
+
+# Temporarily disabled - needs libgit2 direct integration  
+# src/gitmanager.h
 
 DISTFILES += \
     qml/components/MyColumnLayout.qml \

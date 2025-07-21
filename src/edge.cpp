@@ -2,6 +2,7 @@
 #include "network.h"
 #include "utilities.h"
 #include <QDebug>
+#include <cmath>
 
 Edge::Edge(Node* source, Node* target, QObject* parent)
     : QObject(parent)
@@ -61,7 +62,7 @@ void Edge::slotTargetPositionChanged()
 double Edge::calcLength() const
 {
     const double length = Utilities::vectorLength(m_target->position() - m_source->position());
-    Q_ASSERT(!isnan(length));
+    Q_ASSERT(!std::isnan(length));
     return length;
 }
 
@@ -70,7 +71,7 @@ double Edge::force() const
     const double springForce = (m_length - m_neutralLength) * m_springConstant;
     const double dampingForce = ((m_length - m_oldLength) / Network::stepSize) * m_dampingConstant;
     const double resultingForce = springForce + dampingForce;
-    Q_ASSERT(!isnan(resultingForce));
+    Q_ASSERT(!std::isnan(resultingForce));
     return resultingForce;
 }
 

@@ -1,8 +1,10 @@
 #include "network.h"
 #include "utilities.h"
-#include "performancesuite.h"
+// FIXME: PerformanceSuite temporarily disabled
+// #include "performancesuite.h"
 
 #include <QDebug>
+#include <cmath>
 
 Network::Network()
     : m_timer(this)
@@ -130,7 +132,8 @@ Edge* Network::edgeAt(int index) const
 void Network::tick()
 {
     //m_elapsedTimer.start();
-    PerformanceSuite::getInstance()->tick("Network::tick repelling");
+    // FIXME: Performance tracking temporarily disabled
+    // PerformanceSuite::getInstance()->tick("Network::tick repelling");
 
     for (auto cell : m_nodesByPosition.uniqueKeys())
     {
@@ -197,9 +200,9 @@ void Network::tick()
 //            node_j->applyForce(-force);
 //        }
 //    }
-    PerformanceSuite::getInstance()->tock("Network::tick repelling");
+    // PerformanceSuite::getInstance()->tock("Network::tick repelling");
 
-    PerformanceSuite::getInstance()->tick("Network::tick edgeforces");
+    // PerformanceSuite::getInstance()->tick("Network::tick edgeforces");
     for (auto node : m_nodes)
     {
         node->applyEdgeForces();
@@ -208,8 +211,8 @@ void Network::tick()
         //node->applyForce((-1) * m_centerTetherDamperConstant * Utilities::vectorProjection(node->velocity(), node->position()));
         node->applyForce((-1) * m_airFrictionConstant * Utilities::vectorLength(node->velocity()) * node->velocity());
     }
-    PerformanceSuite::getInstance()->tock("Network::tick edgeforces");
-    PerformanceSuite::getInstance()->tick("Network::tick updates");
+    // PerformanceSuite::getInstance()->tock("Network::tick edgeforces");
+    // PerformanceSuite::getInstance()->tick("Network::tick updates");
     for (auto node : m_nodes)
     {
         node->doStep();
@@ -219,7 +222,7 @@ void Network::tick()
     {
         edge->updatePositions();
     }
-    PerformanceSuite::getInstance()->tock("Network::tick updates");
+    // PerformanceSuite::getInstance()->tock("Network::tick updates");
 }
 
 int Network::nodeCount(QQmlListProperty<Node>* list) {
@@ -240,8 +243,8 @@ Edge* Network::edgeAt(QQmlListProperty<Edge>* list, int index) {
 
 QPoint Network::discretizeNodePosition(const QPointF &nodePosition)
 {
-    const int roundedX = round(nodePosition.x() / m_gridSize);
-    const int roundedY = round(nodePosition.y() / m_gridSize);
+    const int roundedX = std::round(nodePosition.x() / m_gridSize);
+    const int roundedY = std::round(nodePosition.y() / m_gridSize);
     return QPoint(roundedX, roundedY);
 }
 

@@ -2,6 +2,7 @@
 #define EDGE_H
 
 #include <QObject>
+#include <QPointF>
 #include <optional>
 
 #include "node.h"

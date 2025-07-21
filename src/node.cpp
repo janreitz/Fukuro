@@ -3,6 +3,7 @@
 #include "network.h"
 
 #include <QDebug>
+#include <cmath>
 
 Node::Node(const QPointF& position , const QString& name, const bool& docExists, QObject *parent)
     : QObject(parent)
@@ -33,7 +34,7 @@ QPointF Node::position() const
 
 void Node::setPosition(const QPointF& pos)
 {
-    Q_ASSERT(!isnan(pos.x()) | !isnan(pos.y()));
+    Q_ASSERT(!std::isnan(pos.x()) | !std::isnan(pos.y()));
     m_oldPosition = m_position;
     m_position = pos;
     m_currentForce = QPointF();
@@ -92,7 +93,7 @@ void Node::applyEdgeForces()
 
 void Node::applyForce(const QPointF &force)
 {
-    Q_ASSERT(!isnan(force.x()) && !isnan(force.y()));
+    Q_ASSERT(!std::isnan(force.x()) && !std::isnan(force.y()));
     m_currentForce += force;
 }
 

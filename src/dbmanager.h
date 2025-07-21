@@ -8,6 +8,7 @@
 #include <QtSql/QSqlTableModel>
 
 #include <optional>
+#include <memory>
 
 class DBManager : public QObject
 {

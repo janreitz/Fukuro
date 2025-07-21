@@ -1,7 +1,8 @@
 #include "editorbackend.h"
 #include "utilities.h"
 #include "settings.h"
-#include "gitmanager.h"
+// FIXME: Git functionality temporarily disabled
+// #include "gitmanager.h"
 
 #include <QFile>
 #include <QDir>
@@ -23,7 +24,8 @@ EditorBackend::EditorBackend(QObject *parent)
     , m_document(nullptr)
     , m_cursor()
 {
-    connect(this, &EditorBackend::fileSaved, GitManager::getInstance(), &GitManager::slotFileSaved);
+    // FIXME: Git functionality temporarily disabled
+    // connect(this, &EditorBackend::fileSaved, GitManager::getInstance(), &GitManager::slotFileSaved);
 }
 
 QQuickTextDocument *EditorBackend::document() const

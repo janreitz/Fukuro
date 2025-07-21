@@ -4,7 +4,8 @@
 #include <QObject>
 #include <QDir>
 
-#include "qgitrepository.h"
+// FIXME: Git functionality temporarily disabled - needs libgit2 direct integration
+// #include "qgitrepository.h"
 
 class GitManager: public QObject
 {

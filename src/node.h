@@ -2,6 +2,7 @@
 #define NODE_H
 
 #include <QObject>
+#include <QPointF>
 
 class Edge;
 class Node : public QObject
